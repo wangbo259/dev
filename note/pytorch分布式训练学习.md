@@ -1,6 +1,7 @@
 # API
 单机多卡有两个api可以用，torch.nn.DataParallel已经被淘汰，现在用torch.nn.parallel.DitributedDataParallel
-> 主要是通过python -m torch.distributed.launch --nproc_per_node=n_gpus train.py来实现运行
+> 主要是通过python -m torch.distributed.launch --nproc_per_node=n_gpus train.py来实现运行 <br>
+> CUDA_VISIBLE_DEVICES=0,2 python -m torch.distributed.launch --nproc_per_node=2 your_training_script.py
 ![alt text](image.png)
 ![alt text](image-1.png)
 
