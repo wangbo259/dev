@@ -7,6 +7,7 @@
 
 
 # 示例
+> 在train_ddp.py中有成功的示例版本
 ```
 import argparse
 import torch
