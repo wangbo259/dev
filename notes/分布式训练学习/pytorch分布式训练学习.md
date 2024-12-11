@@ -55,3 +55,9 @@ if __name__=='__main__':
 
 # Yarn和Spark对比
 ![alt text](image-2.png)
+
+# Standalone架构（并行环境下）
+![alt text](image-3.png)
+
+# spark的配置文件
+![alt text](image-4.png)
