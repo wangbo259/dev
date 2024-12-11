@@ -61,3 +61,8 @@ if __name__=='__main__':
 
 # spark的配置文件
 ![alt text](image-4.png)
+
+# 一般默认的webui端口
+- master的端口8080
+- driver的端口4040
+- history的端口18080
