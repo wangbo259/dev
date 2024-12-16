@@ -66,3 +66,12 @@ if __name__=='__main__':
 - master的端口8080
 - driver的端口4040
 - history的端口18080
+![alt text](image-6.png)
+
+# 运行层级划分
+![alt text](image-5.png)
+
+![alt text](image-7.png)
+
+# 避免master崩溃造成单点崩溃问题
+![alt text](image-8.png)
