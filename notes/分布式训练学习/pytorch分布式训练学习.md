@@ -87,3 +87,7 @@ if __name__=='__main__':
 - Client：客户端模式，在客户端内创建driver进程，通讯成本高，但是日志输出在客户端内，方便查看。
 
 ![alt text](image-11.png)
+
+## yarn模式流程
+![alt text](image-12.png)
+![alt text](image-13.png)
