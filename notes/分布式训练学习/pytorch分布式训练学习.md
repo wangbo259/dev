@@ -91,3 +91,12 @@ if __name__=='__main__':
 ## yarn模式流程
 ![alt text](image-12.png)
 ![alt text](image-13.png)
+
+# pyspark代码的原理（相对于java/scala）
+![alt text](image-15.png)
+![alt text](image-14.png)
+
+# SparkCore知识点
+
+## RDD定义
+![alt text](image-16.png)
