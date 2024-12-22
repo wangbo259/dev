@@ -98,5 +98,17 @@ if __name__=='__main__':
 
 # SparkCore知识点
 
-## RDD定义
+## RDD
+### RDD定义
 ![alt text](image-16.png)
+
+### RDD特性
+![alt text](image-17.png)
+
+![alt text](image-18.png)
+
+![alt text](image-19.png)
+
+![alt text](image-20.png)
+
+![alt text](image-21.png)
