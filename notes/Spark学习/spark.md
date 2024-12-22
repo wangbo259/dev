@@ -58,3 +58,18 @@
 ![alt text](image-20.png)
 
 ![alt text](image-21.png)
+
+## DAG（有向无环图）
+### job划分：
+整个任务可能会有很多job，一个job对应一个DAG
+### 宽窄依赖的划分
+![alt text](image.png)
+### stage的划分
+![alt text](image-1.png)
+### 内存迭代计算
+![alt text](image-22.png)
+![alt text](image-23.png)
+![alt text](image-24.png)
+
+## spark并行度的规划---先有并行度规划才确定有几个分区
+![alt text](image-25.png)
