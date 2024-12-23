@@ -99,7 +99,29 @@ sql经过Catalyst优化器解析并优化后经由rdd执行任务
 # spark的shuffle过程
 ![alt text](image-33.png)
 
+![alt text](image-34.png)
+
+![alt text](image-35.png)
+
+![alt text](image-36.png)
 
 # 参数设置
 1. 有多少服务器exector就设计最少多少个
 2. spark.sql.shuffle.partitions，该参数指的是在sql计算中，shuffle算子阶段默认的分区数，根据集群中可用cpu核数设置，在实际项目中需要合理设置，和并行度的参数相互独立。
+3. 自适应查询参数
+```
+set spark.sql.adaptive.enabled = true
+```
+![alt text](image-37.png)
+![alt text](image-38.png)
+![alt text](image-39.png)
+> 触发动态优化倾斜join需要满足两个条件，即图中所示，需要该分区的大小大于中位数的10倍（可调参数）以及该分区大小大于某个值（可调参数）
+
+4. Sort Merge Join最适合用于以下情况：
+
+- 已经排序的数据：如果数据集已经按照连接键排序，或者可以很容易地被排序，那么Sort Merge Join是一个非常好的选择。
+- 大数据量：对于大数据量，Sort Merge Join可以减少数据的shuffle，从而减少网络传输和磁盘I/O，提高性能。
+>配置: 在Spark中，你可以通过设置spark.sql.join.preferSortMergeJoin配置项来控制是否优先使用Sort Merge Join。如果设置为true，Spark会尽可能使用Sort Merge Join，如果设置为false，则会使用Shuffle Hash Join作为默认的连接方式。
+```
+spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
+```
