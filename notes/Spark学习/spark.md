@@ -73,3 +73,33 @@
 
 ## spark并行度的规划---先有并行度规划才确定有几个分区
 ![alt text](image-25.png)
+
+
+## spark任务调度
+![alt text](image-26.png)
+
+# sparksql的dataframe
+![alt text](image-27.png)
+![alt text](image-28.png)
+
+## 读取外部数据
+![alt text](image-29.png)
+
+# sparksql执行逻辑
+sql经过Catalyst优化器解析并优化后经由rdd执行任务
+![alt text](image-30.png)
+
+两种优化方法：
+![alt text](image-31.png)
+
+
+# spark on hive的原理：借用了hive的MetaStore服务
+![alt text](image-32.png)
+
+# spark的shuffle过程
+![alt text](image-33.png)
+
+
+# 参数设置
+1. 有多少服务器exector就设计最少多少个
+2. spark.sql.shuffle.partitions，该参数指的是在sql计算中，shuffle算子阶段默认的分区数，根据集群中可用cpu核数设置，在实际项目中需要合理设置，和并行度的参数相互独立。
