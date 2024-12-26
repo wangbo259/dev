@@ -157,3 +157,6 @@ spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
 
 ### 列裁剪
 > 只保留有用字段
+
+## 基于CBO的优化（代价最小优化）
+### 
