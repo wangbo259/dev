@@ -128,7 +128,7 @@ spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
 
 
 # 参数调优
-【sparksql默认并行度为200】
+【sparksql默认并行度为200，即task数量】
 ## 物理执行计划解读
 ![alt text](image-40.png)
 
@@ -136,3 +136,24 @@ spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
 1. 给出每个exector分配的线程数，这样就可以估算出exector的个数
 2. 需要知道yarn的容器的内存上下限，之后可以根据内存大小和exector的个数来估计每个exector的内存的最大值
 ![alt text](image-41.png)
+
+## exector内存估计
+- 其中Executor的内存为最核心的部分，首先知道每个exector设定了几个线程（核心），通过数据大小和并行度可以估算每个线程需要的内存大小，相乘即可得到每个exector的Executor部分需要的内存，再估算得到每个exector需要的内存。
+![alt text](image-42.png)
+
+## 充分利用cpu，设置合适并发度
+- 先确定exector的数量和每个exector的核数，相乘即为并行度，再由并行度确定并发度（2～3倍）
+![alt text](image-44.png)
+![alt text](image-43.png)
+
+
+# sparksql优化
+## 基于RBO的优化
+### 谓词下推【着重注意，避免这种问题】
+> 左连接（或右连接）后如果要筛选结果，如果连接字段存在null，放在on和where的筛选条件会产生不同的谓词下推结果，防止意外出现统一操作（大部分适用）：
+1. 连接字段的筛选条件尽量放在on部分
+2. 筛选条件尽量基于主表字段
+![alt text](image-45.png)
+
+### 列裁剪
+> 只保留有用字段
