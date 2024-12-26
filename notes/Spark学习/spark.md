@@ -125,3 +125,14 @@ set spark.sql.adaptive.enabled = true
 ```
 spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
 ```
+
+
+# 参数调优
+【sparksql默认并行度为200】
+## 物理执行计划解读
+![alt text](image-40.png)
+
+## 资源估算
+1. 给出每个exector分配的线程数，这样就可以估算出exector的个数
+2. 需要知道yarn的容器的内存上下限，之后可以根据内存大小和exector的个数来估计每个exector的内存的最大值
+![alt text](image-41.png)
