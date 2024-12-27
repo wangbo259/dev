@@ -159,4 +159,82 @@ spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
 > 只保留有用字段
 
 ## 基于CBO的优化（代价最小优化）
-### 
+### 手动用参数开启
+> CBO可以自动优化join顺序，多表join时可以将其开启
+
+![alt text](image-46.png)
+![alt text](image-47.png)
+
+
+## 广播join
+> 判断表的大小来选择是否强制join
+
+![alt text](image-48.png)
+
+> sql中通过/* */强制广播
+
+![alt text](image-49.png)
+
+## SMB join
+> 适合大表和大表之间进行join，采用了分治思想，先分桶，桶内排序，对应的桶之间进行join
+
+![alt text](image-50.png)
+
+## 数据倾斜
+
+### 单表字段倾斜
+> spark会自动进行预聚合，也可以手动控制进行两阶段聚合
+```
+  def main( args: Array[String] ): Unit = {
+
+    val sparkConf = new SparkConf().setAppName("SkewAggregationTuning")
+      .set("spark.sql.shuffle.partitions", "36")
+//      .setMaster("local[*]")
+    val sparkSession: SparkSession = InitUtil.initSparkSession(sparkConf)
+
+    sparkSession.udf.register("random_prefix", ( value: Int, num: Int ) => randomPrefixUDF(value, num))
+    sparkSession.udf.register("remove_random_prefix", ( value: String ) => removeRandomPrefixUDF(value))
+
+
+    val sql1 =
+      """
+        |select
+        |  courseid,
+        |  sum(course_sell) totalSell
+        |from
+        |  (
+        |    select
+        |      remove_random_prefix(random_courseid) courseid,
+        |      course_sell
+        |    from
+        |      (
+        |        select
+        |          random_courseid,
+        |          sum(sellmoney) course_sell
+        |        from
+        |          (
+        |            select
+        |              random_prefix(courseid, 6) random_courseid,
+        |              sellmoney
+        |            from
+        |              sparktuning.course_shopping_cart
+        |          ) t1
+        |        group by random_courseid
+        |      ) t2
+        |  ) t3
+        |group by
+        |  courseid
+      """.stripMargin
+
+
+    val sql2=
+      """
+        |select
+        |  courseid,
+        |  sum(sellmoney)
+        |from sparktuning.course_shopping_cart
+        |group by courseid
+      """.stripMargin
+
+    sparkSession.sql(sql1).show(10000)
+```
