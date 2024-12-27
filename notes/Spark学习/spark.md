@@ -238,3 +238,22 @@ spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
 
     sparkSession.sql(sql1).show(10000)
 ```
+### Join 数据倾斜优化
+1. 小表广播join
+2. 解决顽固的key极为不均衡：拆分大 key 打散大表 扩容小表
+![alt text](image-51.png)
+
+
+## job优化
+### Map端聚合（spark自己会完成）
+
+### 读取小文件优化
+> openCostlnBytes指的是预估打开一个文件的开销，用来预估多少个小文件可以合并到一个分区内，一般设置和小文件一样的大小
+![alt text](image-52.png)
+![alt text](image-53.png)
+![alt text](image-54.png)
+
+### 调整输出流buffer
+> 内存buffer默认初始值为5M，无法调整
+
+![alt text](image-55.png)
