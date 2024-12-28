@@ -244,7 +244,7 @@ spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
 ![alt text](image-51.png)
 
 
-## job优化
+## Map端优化
 ### Map端聚合（spark自己会完成）
 
 ### 读取小文件优化
@@ -254,6 +254,27 @@ spark.conf.set("spark.sql.join.preferSortMergeJoin", "true")
 ![alt text](image-54.png)
 
 ### 调整输出流buffer
-> 内存buffer默认初始值为5M，无法调整
-
+> 内存buffer默认初始值为5M，无法调整，优化的是shuffle write阶段
+```
+# 适当调大提高溢写效率
+spark.shuffle.file.buffer = 32k
+```
 ![alt text](image-55.png)
+
+
+## Reduce端优化
+### 输出小文件很多
+![alt text](image-56.png)
+![alt text](image-57.png)
+![alt text](image-58.png)
+![alt text](image-59.png)
+
+### 增加reduce缓冲区，减少拉去次数
+```
+spark.reducer.maxSizeInFlight = 96m
+```
+![alt text](image-60.png)
+![alt text](image-61.png)
+
+### 使用堆外内存
+> 当缓存数据很大（几十GB、几百GB）时使用堆外缓存可以减少对exector的内存压力，增加效率
