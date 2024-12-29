@@ -278,3 +278,8 @@ spark.reducer.maxSizeInFlight = 96m
 
 ### 使用堆外内存
 > 当缓存数据很大（几十GB、几百GB）时使用堆外缓存可以减少对exector的内存压力，增加效率
+
+
+# HDFS
+## 追加合并命令
+![alt text](image-62.png)
