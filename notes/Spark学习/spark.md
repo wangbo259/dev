@@ -283,3 +283,6 @@ spark.reducer.maxSizeInFlight = 96m
 # HDFS
 ## 追加合并命令
 ![alt text](image-62.png)
+
+
+
