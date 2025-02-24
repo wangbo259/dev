@@ -67,4 +67,49 @@
     2. 短期兴趣（在线挖掘）
 ```
 ![alt text](image-7.png)
+```
+特征交叉：
+    1. 笛卡尔积交叉
+    2. 内积交叉
+```
+```
+偏差特征：
+    如何解决？？？？？
+```
+![alt text](image-8.png)
+![alt text](image-9.png)
+![alt text](image-10.png)
+![alt text](image-11.png)
 
+## 数值特征处理
+![alt text](image-12.png)
+
+### 标准化
+> 对于长尾分布的特征，先经过开方或log转化为近似正态，再进行标准化
+
+### 数据平滑与消偏
+![alt text](image-13.png)
+![alt text](image-14.png)
+
+### 分桶离散化
+![alt text](image-15.png)
+
+### 类别特征的处理
+![alt text](image-16.png)
+![alt text](image-17.png)
+```
+1. embedding可以拓展类别特征的内涵
+2. 类别特征纬度特别高，但是稀疏，可以用稀疏算法解决
+3. 罕见的类别特征训练数据较少，训练不充分，可以为不同的特征自适应调节训练速率
+```
+![alt text](image-18.png)
+
+
+> 类别特征分布不均衡:
+![alt text](image-20.png)
+![alt text](image-21.png)
+
+
+### 类别特征embedding时进行哈希映射
+![alt text](image-22.png)
+![alt text](image-23.png)
