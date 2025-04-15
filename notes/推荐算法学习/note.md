@@ -113,3 +113,9 @@
 ### 类别特征embedding时进行哈希映射
 ![alt text](image-22.png)
 ![alt text](image-23.png)
+
+
+## 阅读心得
+1. 在利用pooling提取用户行为序列中的兴趣时需要根据不同情况考虑采用pooling的方式：在召回时，缺乏候选物料信息，适合采用简单的pooling方式（例如sum pooling）；在精排时，可以将候选物料信息当作query来挖掘行为序列中对应的兴趣，从而进行自适应的pooling。（若没有候选物料，可以将行为序列的最后一个物料作为query来衡量整个行为序列）
+
+2. 
